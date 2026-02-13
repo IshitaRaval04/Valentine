@@ -179,17 +179,15 @@ function createHeart(){
 }
 function sayYes(){
     document.getElementById("answer").innerText =
-    "YAYYY ❤️ I knew it!! Now you're officially my Valentine 😌💘";
+    "Hehe 💖 I knew it!! Now you're officially my Valentine 😌💘 Happy Valentine’s Day Dhinglo❤️";
 }
 
 const noBtn = document.getElementById("noBtn");
-const letter = document.getElementById("letter");
-
-letter.style.position = "relative";
+const envelope = document.getElementById("envelope");
 
 let attempts = 0;
-let scale = 1;
 
+// when cursor tries to touch the button
 noBtn.addEventListener("mouseenter", escapeNo);
 noBtn.addEventListener("click", escapeNo);
 
@@ -197,39 +195,42 @@ function escapeNo(){
 
     attempts++;
 
-    // shrink button
-    scale -= 0.12;
-    if(scale < 0.45) scale = 0.45;
-    noBtn.style.transform = `scale(${scale})`;
-
-    // change text after first try
-    if(attempts >= 1 && attempts < 5){
+    // change text while escaping
+    if(attempts < 5){
         noBtn.innerText = "Are you sure? 😶";
     }
 
-    // after 5 tries it converts to YES
+    // after 5 tries it becomes YES
     if(attempts >= 5){
-        noBtn.innerText = "Fine… Yes ❤️";
-        noBtn.style.transform = "scale(1)";
+        noBtn.innerText = "Okay Yes ❤️";
         noBtn.onclick = sayYes;
         return;
     }
 
-    // move only in bottom area of letter
-    const letterHeight = letter.clientHeight;
-    const letterWidth = letter.clientWidth;
+    // shrink slightly each time
+    const scale = Math.max(0.55, 1 - attempts*0.08);
+    noBtn.style.transform = `scale(${scale})`;
 
-    const buttonWidth = noBtn.offsetWidth;
-    const buttonHeight = noBtn.offsetHeight;
+    moveOutsideLetter();
+}
 
-    const minY = letterHeight * 0.65;
-    const maxY = letterHeight - buttonHeight - 20;
-    const maxX = letterWidth - buttonWidth - 20;
+function moveOutsideLetter(){
 
-    const newX = Math.random() * maxX;
-    const newY = minY + Math.random() * (maxY - minY);
+    const envRect = envelope.getBoundingClientRect();
+    const btnW = noBtn.offsetWidth;
+    const btnH = noBtn.offsetHeight;
 
-    noBtn.style.position = "absolute";
+    // allowed area = below the letter only
+    const minY = envRect.bottom + 10;
+    const maxY = window.innerHeight - btnH - 10;
+
+    const minX = 10;
+    const maxX = window.innerWidth - btnW - 10;
+
+    const newX = minX + Math.random()*(maxX-minX);
+    const newY = minY + Math.random()*(maxY-minY);
+
+    noBtn.style.position = "fixed";
     noBtn.style.left = newX + "px";
     noBtn.style.top = newY + "px";
 }
