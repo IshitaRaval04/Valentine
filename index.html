@@ -183,31 +183,24 @@ function sayYes(){
 }
 
 const noBtn = document.getElementById("noBtn");
+const letter = document.getElementById("letter");
 
-document.addEventListener("mousemove",(e)=>{
-    const rect = noBtn.getBoundingClientRect();
-
-    const distance = Math.hypot(
-        e.clientX - (rect.left + rect.width/2),
-        e.clientY - (rect.top + rect.height/2)
-    );
-
-    if(distance < 120){
-        moveButton();
-    }
-});
+// Move ONLY when user tries to hover/click
+noBtn.addEventListener("mouseenter", moveButton);
+noBtn.addEventListener("click", moveButton);
 
 function moveButton(){
-    const padding = 20;
-    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+    const letterRect = letter.getBoundingClientRect();
+
+    const maxX = letterRect.width - noBtn.offsetWidth - 20;
+    const maxY = letterRect.height - noBtn.offsetHeight - 20;
 
     const newX = Math.random() * maxX;
     const newY = Math.random() * maxY;
 
-    noBtn.style.position="fixed";
-    noBtn.style.left=newX+"px";
-    noBtn.style.top=newY+"px";
+    noBtn.style.position = "absolute";
+    noBtn.style.left = newX + "px";
+    noBtn.style.top = newY + "px";
 }
 </script>
 
