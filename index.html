@@ -54,20 +54,22 @@ button:hover{transform:scale(1.1)}
 }
 
 #letter{
-    position:absolute;
-    width:290px;
-    height:380px;
-    background:white;
-    top:40px;
-    border-radius:10px;
-    padding:20px;
-    box-sizing:border-box;
-    transform:translateY(180px);
-    opacity:0;
-    transition:1.5s;
-    overflow:auto;
-    color:#333;
-    line-height:1.6;
+position:absolute;
+width:520px;
+height:620px;
+background:white;
+top:60px;
+border-radius:18px;
+padding:40px 45px;
+box-sizing:border-box;
+transform:translateY(260px);
+opacity:0;
+transition:1.6s ease;
+overflow:hidden;
+color:#444;
+line-height:1.9;
+font-size:18px;
+box-shadow:0 25px 60px rgba(0,0,0,0.25);
 }
 
 .open #flap{transform:rotateX(180deg);}
@@ -103,35 +105,47 @@ button:hover{transform:scale(1.1)}
 
 <script>
 
-const nickname = "bubudu"; // <-- CHANGE THIS TO HIS NICKNAME
+const nickname = "BUBUDU"; // <-- CHANGE THIS TO HIS NICKNAME
 
 const longMessage = `
-Hi ${nickname},
+Hi My Future Hubby ❤️,
 
-I don’t think I say this enough, but you make my life softer in ways I never knew I needed.
+I don't think you realize how present you are in my life even when you're not physically here.
 
-You are there in my normal days — not just the big memories — and that matters more than anything.  
-The random conversations, the comfortable silences, the stupid jokes, the way you listen even when I talk nonsense… those things became my safe place.
+I miss you in the smallest moments —
+when something funny happens and you're the first person I want to tell,
+when I see something that you would definitely make a comment about,
+when my day ends and I wish I could just exist next to you without saying anything.
 
-I love how you exist in my world without trying.  
-You don’t force happiness — you create it naturally.
+Being away from you has made me understand how much space you quietly occupy in my heart.
+Some days I’m okay, I smile, I stay busy…
+and some days I miss you so much it actually hurts a little.
+There are nights I randomly think of you and I end up crying — not because I’m sad about us,
+but because I love you and I just wish you were here.
 
-With you, I don’t feel like I have to perform, impress, or pretend.  
-I can just be me… and somehow that feels enough.
+But I also know this distance is temporary.
+And that thought makes me hold on a little tighter.
 
-You turned ordinary moments into memories I replay in my head when I miss you.
+One day soon,
+these calls will turn into conversations beside each other,
+goodnights will not be through a screen,
+and I won’t have to imagine your presence — I’ll just feel it.
 
-If someday life gets loud, stressful, or confusing — I hope you always remember this:
+Until then,
+please remember this quietly and always:
 
-You are appreciated.
-You are chosen.
-And you are deeply loved in a quiet, real way.
+You are deeply loved.
+You are waited for.
+And no distance has ever made me feel less close to you — only more sure of you.
 
-No grand poetry needed.
+I miss you more than I can properly explain,
+and I love you more than I ever manage to say.
 
-Just me,
-loving you a little more every day ❤️
+loving you little more everyday 
+Forever yours,
+❤️
 `;
+
 
 function openLetter(){
     document.querySelector("button").style.display="none";
