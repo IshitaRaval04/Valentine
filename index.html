@@ -183,53 +183,56 @@ function sayYes(){
 }
 
 const noBtn = document.getElementById("noBtn");
-const letter = document.getElementById("letter");
+const envelope = document.getElementById("envelope");
 
 let attempts = 0;
 
+// when cursor tries to touch the button
 noBtn.addEventListener("mouseenter", escapeNo);
-noBtn.addEventListener("click", e=>{
-    e.preventDefault();
-    escapeNo();
-});
+noBtn.addEventListener("click", escapeNo);
 
 function escapeNo(){
 
     attempts++;
 
-    // change text
+    // change text while escaping
     if(attempts < 5){
         noBtn.innerText = "Are you sure? 😶";
     }
 
-    // after enough tries → becomes yes
+    // after 5 tries it becomes YES
     if(attempts >= 5){
         noBtn.innerText = "Okay Yes ❤️";
         noBtn.onclick = sayYes;
-        noBtn.style.transform="scale(1)";
         return;
     }
 
-    // shrink effect
-    const scale = Math.max(0.65, 1 - attempts*0.08);
+    // shrink slightly each time
+    const scale = Math.max(0.55, 1 - attempts*0.08);
     noBtn.style.transform = `scale(${scale})`;
 
-    moveInsideLetter();
+    moveOutsideLetter();
 }
 
-function moveInsideLetter(){
+function moveOutsideLetter(){
 
-    const letterRect = letter.getBoundingClientRect();
+    const envRect = envelope.getBoundingClientRect();
+    const btnW = noBtn.offsetWidth;
+    const btnH = noBtn.offsetHeight;
 
-    const maxX = letter.clientWidth - noBtn.offsetWidth - 20;
-    const maxY = letter.clientHeight - noBtn.offsetHeight - 20;
+    // allowed area = below the letter only
+    const minY = envRect.bottom + 10;
+    const maxY = window.innerHeight - btnH - 10;
 
-    const newX = Math.random() * maxX;
-    const newY = Math.random() * maxY;
+    const minX = 10;
+    const maxX = window.innerWidth - btnW - 10;
 
-    noBtn.style.position="absolute";
-    noBtn.style.left=newX+"px";
-    noBtn.style.top=newY+"px";
+    const newX = minX + Math.random()*(maxX-minX);
+    const newY = minY + Math.random()*(maxY-minY);
+
+    noBtn.style.position = "fixed";
+    noBtn.style.left = newX + "px";
+    noBtn.style.top = newY + "px";
 }
 </script>
 
