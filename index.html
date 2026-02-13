@@ -103,6 +103,7 @@ box-shadow:0 40px 120px rgba(0,0,0,0.35);
     <div id="letter">
         <h2>To My Favorite Person ❤️</h2>
         <p id="message"></p>
+        Will you be my Valentine Mr Hemil Sen?
     </div>
 </div>
 
@@ -113,9 +114,9 @@ const nickname = "BUBUDU"; // <-- CHANGE THIS TO HIS NICKNAME
 const longMessage = `
 Hi My Future Hubby ❤️,
 
-I don't think you realize how present you are in my life even when you're not physically here.
+Bubu I don't think you realize how present you are in my life even when you're not physically here.
 
-I miss you in the smallest moments —
+I miss you in the smallest moments baby—
 when something funny happens and you're the first person I want to tell,
 when I see something that you would definitely make a comment about,
 when my day ends and I wish I could just exist next to you without saying anything.
@@ -123,7 +124,7 @@ when my day ends and I wish I could just exist next to you without saying anythi
 Being away from you has made me understand how much space you quietly occupy in my heart.
 Some days I’m okay, I smile, I stay busy…
 and some days I miss you so much it actually hurts a little.
-There are nights I randomly think of you and I end up crying — not because I’m sad about us,
+There are times I randomly think of you and I end up crying — not because I’m sad about us,
 but because I love you and I just wish you were here.
 
 But I also know this distance is temporary.
@@ -134,17 +135,17 @@ these calls will turn into conversations beside each other,
 goodnights will not be through a screen,
 and I won’t have to imagine your presence — I’ll just feel it.
 
-Until then,
+Until then cutulu,
 please remember this quietly and always:
 
-You are deeply loved.
-You are waited for.
-And no distance has ever made me feel less close to you — only more sure of you.
+You are deeply loved my sweetie.
+You are waited for my future hubs.
+And no distance has ever made me feel less close to you — only more sure of you cutulu bubudu.
 
-I miss you more than I can properly explain,
-and I love you more than I ever manage to say.
+I miss you more sweetheart,
+and I love you more than I ever manage to say
 
-loving you little more everyday 
+loving you little more everyday. 
 Forever yours,
 ❤️
 `;
@@ -157,7 +158,7 @@ function openLetter(){
 
     setTimeout(()=>env.classList.add("open"),200);
     document.getElementById("message").innerText=longMessage;
-
+    setTimeout(()=>document.getElementById("proposal").style.display="block",1800);
     setInterval(createHeart,250);
 }
 
@@ -170,6 +171,21 @@ function createHeart(){
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),7000);
 }
+    function sayYes(){
+document.getElementById("answer").innerText =
+"YAYYY ❤️ I knew it!! Now you're officially stuck with me forever 😌";
+}
+
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover",()=>{
+const x = Math.random() * (window.innerWidth - 120);
+const y = Math.random() * (window.innerHeight - 60);
+noBtn.style.position="absolute";
+noBtn.style.left=x+"px";
+noBtn.style.top=y+"px";
+});
+
 </script>
 
 </body>
