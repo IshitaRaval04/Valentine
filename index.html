@@ -183,56 +183,53 @@ function sayYes(){
 }
 
 const noBtn = document.getElementById("noBtn");
-const envelope = document.getElementById("envelope");
+const letter = document.getElementById("letter");
 
 let attempts = 0;
 
-// when cursor tries to touch the button
 noBtn.addEventListener("mouseenter", escapeNo);
-noBtn.addEventListener("click", escapeNo);
+noBtn.addEventListener("click", e=>{
+    e.preventDefault();
+    escapeNo();
+});
 
 function escapeNo(){
 
     attempts++;
 
-    // change text while escaping
+    // change text
     if(attempts < 5){
         noBtn.innerText = "Are you sure? 😶";
     }
 
-    // after 5 tries it becomes YES
+    // after enough tries → becomes yes
     if(attempts >= 5){
         noBtn.innerText = "Okay Yes ❤️";
         noBtn.onclick = sayYes;
+        noBtn.style.transform="scale(1)";
         return;
     }
 
-    // shrink slightly each time
-    const scale = Math.max(0.55, 1 - attempts*0.08);
+    // shrink effect
+    const scale = Math.max(0.65, 1 - attempts*0.08);
     noBtn.style.transform = `scale(${scale})`;
 
-    moveOutsideLetter();
+    moveInsideLetter();
 }
 
-function moveOutsideLetter(){
+function moveInsideLetter(){
 
-    const envRect = envelope.getBoundingClientRect();
-    const btnW = noBtn.offsetWidth;
-    const btnH = noBtn.offsetHeight;
+    const letterRect = letter.getBoundingClientRect();
 
-    // allowed area = below the letter only
-    const minY = envRect.bottom + 10;
-    const maxY = window.innerHeight - btnH - 10;
+    const maxX = letter.clientWidth - noBtn.offsetWidth - 20;
+    const maxY = letter.clientHeight - noBtn.offsetHeight - 20;
 
-    const minX = 10;
-    const maxX = window.innerWidth - btnW - 10;
+    const newX = Math.random() * maxX;
+    const newY = Math.random() * maxY;
 
-    const newX = minX + Math.random()*(maxX-minX);
-    const newY = minY + Math.random()*(maxY-minY);
-
-    noBtn.style.position = "fixed";
-    noBtn.style.left = newX + "px";
-    noBtn.style.top = newY + "px";
+    noBtn.style.position="absolute";
+    noBtn.style.left=newX+"px";
+    noBtn.style.top=newY+"px";
 }
 </script>
 
