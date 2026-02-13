@@ -187,57 +187,52 @@ const envelope = document.getElementById("envelope");
 
 let attempts = 0;
 
-// prevent real clicking
-noBtn.addEventListener("click", e => {
-    e.preventDefault();
-    escapeNo();
-});
-
-// when cursor touches it
+// when cursor tries to touch the button
 noBtn.addEventListener("mouseenter", escapeNo);
+noBtn.addEventListener("click", escapeNo);
 
 function escapeNo(){
 
     attempts++;
 
+    // change text while escaping
     if(attempts < 5){
         noBtn.innerText = "Are you sure? 😶";
     }
 
+    // after 5 tries it becomes YES
     if(attempts >= 5){
         noBtn.innerText = "Okay Yes ❤️";
         noBtn.onclick = sayYes;
-        noBtn.style.transform="scale(1)";
         return;
     }
 
-    // shrink each attempt
-    const scale = Math.max(0.6, 1 - attempts*0.1);
+    // shrink slightly each time
+    const scale = Math.max(0.55, 1 - attempts*0.08);
     noBtn.style.transform = `scale(${scale})`;
 
-    moveBelowLetter();
+    moveOutsideLetter();
 }
 
-function moveBelowLetter(){
+function moveOutsideLetter(){
 
     const envRect = envelope.getBoundingClientRect();
     const btnW = noBtn.offsetWidth;
     const btnH = noBtn.offsetHeight;
 
-    // LOCK AREA: strictly below envelope
-    const minY = envRect.bottom + 20;
+    // allowed area = below the letter only
+    const minY = envRect.bottom + 10;
     const maxY = window.innerHeight - btnH - 10;
 
     const minX = 10;
     const maxX = window.innerWidth - btnW - 10;
 
-    // always stays below
-    let newY = minY + Math.random()*(maxY-minY);
-    let newX = minX + Math.random()*(maxX-minX);
+    const newX = minX + Math.random()*(maxX-minX);
+    const newY = minY + Math.random()*(maxY-minY);
 
     noBtn.style.position = "fixed";
-    noBtn.style.left = `${newX}px`;
-    noBtn.style.top = `${newY}px`;
+    noBtn.style.left = newX + "px";
+    noBtn.style.top = newY + "px";
 }
 </script>
 
