@@ -185,18 +185,49 @@ function sayYes(){
 const noBtn = document.getElementById("noBtn");
 const letter = document.getElementById("letter");
 
-// Move ONLY when user tries to hover/click
-noBtn.addEventListener("mouseenter", moveButton);
-noBtn.addEventListener("click", moveButton);
+letter.style.position = "relative";
 
-function moveButton(){
-    const letterRect = letter.getBoundingClientRect();
+let attempts = 0;
+let scale = 1;
 
-    const maxX = letterRect.width - noBtn.offsetWidth - 20;
-    const maxY = letterRect.height - noBtn.offsetHeight - 20;
+noBtn.addEventListener("mouseenter", escapeNo);
+noBtn.addEventListener("click", escapeNo);
+
+function escapeNo(){
+
+    attempts++;
+
+    // shrink button
+    scale -= 0.12;
+    if(scale < 0.45) scale = 0.45;
+    noBtn.style.transform = `scale(${scale})`;
+
+    // change text after first try
+    if(attempts >= 1 && attempts < 5){
+        noBtn.innerText = "Are you sure? 😶";
+    }
+
+    // after 5 tries it converts to YES
+    if(attempts >= 5){
+        noBtn.innerText = "Fine… Yes ❤️";
+        noBtn.style.transform = "scale(1)";
+        noBtn.onclick = sayYes;
+        return;
+    }
+
+    // move only in bottom area of letter
+    const letterHeight = letter.clientHeight;
+    const letterWidth = letter.clientWidth;
+
+    const buttonWidth = noBtn.offsetWidth;
+    const buttonHeight = noBtn.offsetHeight;
+
+    const minY = letterHeight * 0.65;
+    const maxY = letterHeight - buttonHeight - 20;
+    const maxX = letterWidth - buttonWidth - 20;
 
     const newX = Math.random() * maxX;
-    const newY = Math.random() * maxY;
+    const newY = minY + Math.random() * (maxY - minY);
 
     noBtn.style.position = "absolute";
     noBtn.style.left = newX + "px";
