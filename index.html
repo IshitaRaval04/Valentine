@@ -31,15 +31,17 @@ button{
 button:hover{transform:scale(1.1)}
 
 #envelope{
-    position:absolute;
-    width:320px;
-    height:220px;
-    background:#ff6b81;
-    border-radius:10px;
-    display:none;
-    justify-content:center;
-    align-items:center;
+position:absolute;
+width:min(900px,95vw);
+height:min(520px,60vh);
+background:#ff6b81;
+border-radius:18px;
+display:none;
+justify-content:center;
+align-items:center;
+box-shadow:0 40px 150px rgba(0,0,0,0.45);
 }
+
 
 #flap{
     position:absolute;
@@ -55,22 +57,23 @@ button:hover{transform:scale(1.1)}
 
 #letter{
 position:absolute;
-width:520px;
-height:620px;
+width:min(820px,90vw);
+height:min(760px,88vh);
 background:white;
-top:60px;
-border-radius:18px;
-padding:40px 45px;
+top:80px;
+border-radius:22px;
+padding:55px 60px;
 box-sizing:border-box;
-transform:translateY(260px);
+transform:translateY(320px);
 opacity:0;
-transition:1.6s ease;
-overflow:hidden;
+transition:1.8s ease;
+overflow:auto;
 color:#444;
-line-height:1.9;
-font-size:18px;
-box-shadow:0 25px 60px rgba(0,0,0,0.25);
+line-height:2;
+font-size:20px;
+box-shadow:0 40px 120px rgba(0,0,0,0.35);
 }
+
 
 .open #flap{transform:rotateX(180deg);}
 .open #letter{transform:translateY(-160px);opacity:1;}
