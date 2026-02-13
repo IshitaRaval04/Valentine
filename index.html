@@ -8,62 +8,82 @@
 <style>
 body{
     margin:0;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg,#ff9a9e,#fecfef);
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    text-align:center;
-    color:white;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    font-family:'Georgia',serif;
     overflow:hidden;
 }
 
-.container{
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(12px);
-    padding:40px;
-    border-radius:20px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.2);
-}
-
-h1{
-    font-size:2.5em;
-}
-
 button{
-    margin-top:20px;
-    padding:15px 30px;
+    padding:18px 40px;
+    font-size:20px;
     border:none;
-    border-radius:30px;
+    border-radius:40px;
     background:white;
     color:#ff4d6d;
-    font-size:18px;
     cursor:pointer;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
     transition:0.3s;
 }
+button:hover{transform:scale(1.1)}
 
-button:hover{
-    transform:scale(1.1);
+#envelope{
+    position:absolute;
+    width:320px;
+    height:220px;
+    background:#ff6b81;
+    border-radius:10px;
+    display:none;
+    justify-content:center;
+    align-items:center;
 }
 
-#message{
-    margin-top:25px;
-    font-size:22px;
-    min-height:60px;
+#flap{
+    position:absolute;
+    width:0;
+    height:0;
+    border-left:160px solid transparent;
+    border-right:160px solid transparent;
+    border-bottom:110px solid #ff4757;
+    top:-110px;
+    transform-origin:bottom;
+    transition:1s;
 }
+
+#letter{
+    position:absolute;
+    width:290px;
+    height:380px;
+    background:white;
+    top:40px;
+    border-radius:10px;
+    padding:20px;
+    box-sizing:border-box;
+    transform:translateY(180px);
+    opacity:0;
+    transition:1.5s;
+    overflow:auto;
+    color:#333;
+    line-height:1.6;
+}
+
+.open #flap{transform:rotateX(180deg);}
+.open #letter{transform:translateY(-160px);opacity:1;}
 
 .heart{
     position:absolute;
-    color:white;
-    animation:float 8s linear infinite;
+    color:#ff4d6d;
     font-size:20px;
+    animation:float 7s linear infinite;
 }
 
 @keyframes float{
-    0%{transform:translateY(100vh);opacity:0;}
-    20%{opacity:1;}
-    100%{transform:translateY(-10vh);opacity:0;}
+    0%{transform:translateY(100vh);opacity:0}
+    20%{opacity:1}
+    100%{transform:translateY(-10vh);opacity:0}
 }
 </style>
 
@@ -71,49 +91,68 @@ button:hover{
 
 <body>
 
-<div class="container">
-    <h1>Hi Love ❤️</h1>
-    <p>Tap the button whenever you need a reminder</p>
+<button onclick="openLetter()">Open My Heart 💌</button>
 
-```
-<button onclick="generate()">Why I Appreciate You</button>
-
-<div id="message"></div>
-```
-
+<div id="envelope">
+    <div id="flap"></div>
+    <div id="letter">
+        <h2>To My Favorite Person ❤️</h2>
+        <p id="message"></p>
+    </div>
 </div>
 
 <script>
-const messages = [
-"You're the calm in my chaos.",
-"You make ordinary days feel special.",
-"I love how safe I feel with you.",
-"You listen to me even when I ramble.",
-"You remember little things about me.",
-"Life feels lighter with you in it.",
-"You make me laugh when I don’t want to smile.",
-"I admire how kind you are to people.",
-"You’re my favorite notification.",
-"Home feels like wherever you are.",
-"I trust you more than anyone.",
-"You make me feel chosen every day."
-];
 
-function generate(){
-    const random = messages[Math.floor(Math.random()*messages.length)];
-    document.getElementById("message").innerText = random;
+const nickname = "Bub"; // <-- CHANGE THIS TO HIS NICKNAME
+
+const longMessage = `
+Hi ${nickname},
+
+I don’t think I say this enough, but you make my life softer in ways I never knew I needed.
+
+You are there in my normal days — not just the big memories — and that matters more than anything.  
+The random conversations, the comfortable silences, the stupid jokes, the way you listen even when I talk nonsense… those things became my safe place.
+
+I love how you exist in my world without trying.  
+You don’t force happiness — you create it naturally.
+
+With you, I don’t feel like I have to perform, impress, or pretend.  
+I can just be me… and somehow that feels enough.
+
+You turned ordinary moments into memories I replay in my head when I miss you.
+
+If someday life gets loud, stressful, or confusing — I hope you always remember this:
+
+You are appreciated.
+You are chosen.
+And you are deeply loved in a quiet, real way.
+
+No grand poetry needed.
+
+Just me,
+loving you a little more every day ❤️
+`;
+
+function openLetter(){
+    document.querySelector("button").style.display="none";
+    const env=document.getElementById("envelope");
+    env.style.display="flex";
+
+    setTimeout(()=>env.classList.add("open"),200);
+    document.getElementById("message").innerText=longMessage;
+
+    setInterval(createHeart,250);
 }
 
-function hearts(){
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerText="❤️";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(Math.random()*20+15)+"px";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),8000);
+function createHeart(){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerText="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(Math.random()*25+15)+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),7000);
 }
-setInterval(hearts,300);
 </script>
 
 </body>
